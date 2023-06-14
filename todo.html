@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f4f1;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #8c6b53;
+      margin-bottom: 20px;
+    }
+
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task {
+      position: relative;
+      margin-bottom: 10px;
+      padding: 15px;
+      background-color: #fbeae8;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .task .task-title {
+      font-weight: bold;
+      color: #5d4634;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .task .delete-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #8c6b53;
+      padding: 0;
+    }
+
+    .task .delete-button:hover {
+      color: #e74c3c;
+    }
+
+    .task-input {
+      display: flex;
+    }
+
+    .task-input input {
+      flex: 1;
+      border: none;
+      border-radius: 5px 0 0 5px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .task-input button {
+      border: none;
+      background-color: #8c6b53;
+      color: #fff;
+      padding: 10px 15px;
+      font-size: 16px;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <ul class="task-list" id="taskList">
+      <!-- Existing tasks remain here -->
+      <!-- ... -->
+    </ul>
+    <div class="task-input">
+      <input type="text" id="taskInput" placeholder="Enter a new task">
+      <button type="submit" onclick="addTask()">Add Task</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Retrieve existing tasks from local storage (if any)
+      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+      // Render existing tasks
+      const taskList = document.getElementById('taskList');
+      tasks.forEach(function(task, index) {
+        taskList.appendChild(createTaskElement(task, index));
+      });
+    });
+
+    function createTaskElement(task, index) {
+      const taskElement = document.createElement('li');
+      taskElement.classList.add('task');
+      
+      // Build task HTML structure
+      const taskHtml = `
+        <div class="task-title">${task.title}</div>
+        <button class="delete-button" onclick="deleteTask(${index})">&times;</button>
+      `;
+      
+      // Set task HTML content
+      taskElement.innerHTML = taskHtml;
+
+      return taskElement;
+    }
+
+    function addTask() {
+      // Retrieve tasks from local storage
+      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+      // Get task input value
+      const taskInput = document.getElementById('taskInput');
+      const taskTitle = taskInput.value.trim();
+
+      if (taskTitle !== '') {
+        // Create new task object
+        const newTask = {
+          title: taskTitle
+        };
+
+        // Add new task to the tasks array
+        tasks.push(newTask);
+
+        // Store updated tasks array in local storage
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        // Clear the input field
+        taskInput.value = '';
+
+        // Retrieve the task list element
+        const taskList = document.getElementById('taskList');
+
+        // Create new task element and append it to the task list
+        const newTaskElement = createTaskElement(newTask, tasks.length - 1);
+        taskList.appendChild(newTaskElement);
+      }
+    }
+
+    function deleteTask(index) {
+      // Retrieve tasks from local storage
+      let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+      // Remove the task at the specified index
+      tasks.splice(index, 1);
+
+      // Store updated tasks array in local storage
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+
+      // Retrieve the task list element
+      const taskList = document.getElementById('taskList');
+
+      // Remove the task element from the task list
+      const taskElement = taskList.childNodes[index];
+      taskElement.remove();
+    }
+  </script>
+</body>
+</html>
