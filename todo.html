@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #555;
+    }
+
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .task .task-title {
+      font-weight: bold;
+      color: #222;
+      font-size: 18px;
+    }
+
+    .task .task-details {
+      margin-top: 5px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .task .task-details span {
+      font-weight: bold;
+    }
+
+    .task .task-priority {
+      font-weight: bold;
+      color: #e74c3c;
+    }
+
+    .task .task-label {
+      font-style: italic;
+      color: #3498db;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <ul class="task-list">
+      <li class="task">
+        <div class="task-title">ToDo 1: Check who visited</div>
+        <div class="task-details">
+          <span>Deadline:</span> June 20, 2023
+        </div>
+        <div class="task-details">
+          <span>Priority:</span> High
+        </div>
+        <div class="task-details">
+          <span>Labels:</span> Check who downloaded the resume
+        </div>
+      </li>
+      <li class="task">
+        <div class="task-title">ToDo 2: Check the contact me database</div>
+        <div class="task-details">
+          <span>Deadline:</span> June 25, 2023
+        </div>
+        <div class="task-details">
+          <span>Priority:</span> High
+        </div>
+        <div class="task-details">
+          <span>Labels:</span> Check database for past contacts
+        </div>
+      </li>
+      <li class="task">
+        <div class="task-title">ToDo 3: Increase the number of visitors to the website</div>
+        <div class="task-details">
+          <span>Deadline:</span> June 30, 2023
+        </div>
+        <div class="task-details">
+          <span>Priority:</span> High
+        </div>
+        <div class="task-details">
+          <span>Labels:</span> Promoting the website
+        </div>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
